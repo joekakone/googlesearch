@@ -9,6 +9,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 WAIT = 20
+TOURS = 100
 
 questions = [
 	"Comment étudier en France sans garant ?",
@@ -40,7 +41,7 @@ class GoogleResearch():
 				a = result.find('a')
 				# print(a)
 				href = a.get('href')
-				print('Href: ', href)
+				# print('Href: ', href)
 				if 'https://www.studely.com' in href:
 					# print('Yes')
 					# h3 = a.find('h3')
@@ -74,10 +75,12 @@ def main():
 	# Launch navigator
 	print('Launching navigator...')
 	google = GoogleResearch()
-	for question in questions:
-		print('Q: ', question)
-		google.search(question)
-		# break
+	for i in range(TOURS):
+		print('Tour: ', i+1)
+		for question in questions:
+			print('Q: ', question)
+			google.search(question)
+			# break
 
 	# Close session
 	google.driver.close()
