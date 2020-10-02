@@ -12,7 +12,8 @@
 
 `pip install -r requirements.txt`
 
-## Installation des dépendances de Selenium
+## Installation des dépendances de Selenium Driver
+### Firefox
 **Geckodriver**
 
 `wget https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-linux64.tar.gz`
@@ -32,7 +33,8 @@
 
 `sudo apt-get install default-jdk `
 
-## ChromeDriver
+**ChromeDriver**
+
 `wget https://chromedriver.storage.googleapis.com/2.41/chromedriver_linux64.zip`
 
 `unzip chromedriver_linux64.zip`
@@ -43,8 +45,7 @@
 
 `sudo chmod +x /usr/bin/chromedriver`
 
-
-Suivre ces instructions: https://tecadmin.net/setup-selenium-chromedriver-on-ubuntu/
+*Besoin d'aide: https://tecadmin.net/setup-selenium-chromedriver-on-ubuntu/*
 
 ## Lancer
 `python google.py`
