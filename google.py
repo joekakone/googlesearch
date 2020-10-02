@@ -9,7 +9,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 WAIT = 20
-TOURS = 100
 
 questions = [
 	"Comment étudier en France sans garant ?",
@@ -34,6 +33,7 @@ class GoogleResearch():
 
 	@staticmethod
 	def get_studely_xpath(soup):
+		fld = soup.find('span', {'id': 'fld'})
 		res_soup = soup.find('div', {'id': 'res'})
 		res_list = res_soup.find_all('div', {'class': 'g'})
 		for i, result in enumerate(res_list):
@@ -41,14 +41,12 @@ class GoogleResearch():
 				a = result.find('a')
 				# print(a)
 				href = a.get('href')
-				# print('Href: ', href)
+				print('Href: ', href)
 				if 'https://www.studely.com' in href:
-					# print('Yes')
-					# h3 = a.find('h3')
-					# print(h3)
-					# h3_class = h3.get('class')[0]
-					# print('H3 Class: ', h3_class)
-					return i-1
+					if fld: # Présence de la section "Autres Questions"
+						return i
+					else:
+						return i+1
 			except:
 				pass
 		return None
@@ -61,10 +59,8 @@ class GoogleResearch():
 		# sleep(WAIT)
 		search_soup = BeautifulSoup(self.driver.page_source, 'html.parser')
 		xpath = self.get_studely_xpath(search_soup)
-		# className, xpath = self.get_studely_xpath(search_soup)
 		if xpath:
 			try:
-				# self.driver.find_element(By.CSS_SELECTOR, f".g:nth-child({xpath}) .{className} > span").click()
 				self.driver.find_element(By.CSS_SELECTOR, f".g:nth-child({xpath}) .LC20lb > span").click()
 				# sleep(WAIT)
 			except Exception as e:
@@ -75,12 +71,9 @@ def main():
 	# Launch navigator
 	print('Launching navigator...')
 	google = GoogleResearch()
-	for i in range(TOURS):
-		print('Tour: ', i+1)
-		for question in questions:
-			print('Q: ', question)
-			google.search(question)
-			# break
+	for question in questions:
+		print('Q: ', question)
+		google.search(question)
 
 	# Close session
 	google.driver.close()
