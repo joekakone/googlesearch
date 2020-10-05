@@ -53,7 +53,7 @@ class GoogleResearch():
 		self.driver.find_element(By.NAME, "q").send_keys(question)
 		print('Waiting for results...')
 		self.driver.find_element(By.NAME, "q").send_keys(Keys.ENTER)
-		if self.driver is isinstance(webdriver.Firefox):
+		if isinstance(self.driver, webdriver.Firefox):
 			sleep(WAIT)
 		try:
 			search_soup = BeautifulSoup(self.driver.page_source, 'html.parser')
