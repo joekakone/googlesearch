@@ -37,14 +37,11 @@ class GoogleResearch():
 		res_soup = soup.find('div', {'id': 'res'})
 		res_list = res_soup.find_all('div', {'class': 'g'})
 		for i, result in enumerate(res_list):
-			try:
-				a = result.find('a')
-				href = a.get('href')
-				if 'https://www.studely.com' in href:
-					print('Studely found !')
-					return href
-			except:
-				pass
+			a = result.find('a')
+			href = a.get('href')
+			if 'https://www.studely.com' in href:
+				print('Studely found !')
+				return href
 		print('Studely not found !')
 		return False
 
@@ -58,7 +55,6 @@ class GoogleResearch():
 		try:
 			search_soup = BeautifulSoup(self.driver.page_source, 'html.parser')
 			studely = self.get_studely_xpath(search_soup)
-			print(studely)
 			if studely:
 				print('Loading Studely Page...')
 				self.driver.find_element_by_xpath(f'//a[@href="{studely}"]').click()

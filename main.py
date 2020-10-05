@@ -25,14 +25,15 @@ urls = [
 
 # Launch navigator
 print('Launching navigator...')
-browser = webdriver.Firefox()
+driver = webdriver.Chrome()
+# driver = webdriver.Firefox()
 
 def tour():
 	'''Visit all pages once'''
 	for url in urls:
 		try:
 			print(f'Visiting {url}...')
-			browser.get(url)
+			driver.get(url)
 		except Exception as e:
 			pass
 #		sleep(WAIT)
@@ -40,7 +41,7 @@ def tour():
 def main():
 	# test url - visit principal domain
 	print(f'Visiting {BASE_URL}...')
-	browser.get(BASE_URL)
+	driver.get(BASE_URL)
 
 	# visit all pages N_TOURS times
 	for i in range(N_TOURS):
@@ -49,7 +50,7 @@ def main():
 
 	# Close navigator
 	print('Closing navigator...')
-	browser.quit()
+	driver.quit()
 
 if __name__ == '__main__':
 	main()
