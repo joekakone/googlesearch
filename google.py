@@ -85,7 +85,7 @@ def main():
 	for i in range(TOURS):
 		print(f'** Tour n°{i+1} **')
 		for question in questions:
-			print('--------------------------------------------------')
+			print('----------------------------------------')
 			print('Q: ', question)
 			google.search(question)
 
