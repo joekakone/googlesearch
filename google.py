@@ -90,7 +90,7 @@ def main():
 				print('Q: ', question)
 				google.search(question)
 			except Exception as e:
-				print(e):
+				print(e)
 
 	# Close session
 	google.driver.close()
